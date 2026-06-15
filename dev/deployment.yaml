@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: YOUR_DOCKER_USERNAME/cake-app:v0.1.0
+          image: sven110sugar/cake-app:v0.1.0
           ports:
             - containerPort: 5000
 ---
