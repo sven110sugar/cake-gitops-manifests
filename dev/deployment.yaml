@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cake-app
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cake-app
+  template:
+    metadata:
+      labels:
+        app: cake-app
+    spec:
+      containers:
+        - name: app
+          image: YOUR_DOCKER_USERNAME/cake-app:v0.1.0
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cake-app
+  namespace: dev
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 5000
+  selector:
+    app: cake-app
