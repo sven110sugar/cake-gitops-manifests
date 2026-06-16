@@ -1,1 +1,19 @@
+# dev 环境 — 最小资源，1 副本，debug 开启
+
+image:
+  repository: sven110sugar/cake-app
+  tag: latest
+
+replicas: 1
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+env:
+  name: dev
+  debug: "true"
+
+namespace: dev
 
