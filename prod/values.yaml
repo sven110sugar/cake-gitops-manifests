@@ -1,1 +1,27 @@
+# staging 环境 — 2 副本，模拟生产配置，debug 关闭
+
+image:
+  repository: sven110sugar/cake-app
+  tag: latest
+
+replicas: 2
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits:
+    cpu: 1
+    memory: 512Mi
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 5000
+
+env:
+  name: staging
+  debug: "false"
+
+namespace: staging
 
