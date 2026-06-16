@@ -1,0 +1,17 @@
+---
+# Source: cake-app/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: cake-app
+  namespace: prod
+  labels:
+    app: cake-app
+    env: prod
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 5000
+  selector:
+    app: cake-app

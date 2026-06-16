@@ -1,0 +1,34 @@
+---
+# Source: cake-app/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cake-app
+  namespace: prod
+  labels:
+    app: cake-app
+    env: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cake-app
+  template:
+    metadata:
+      labels:
+        app: cake-app
+        env: prod
+    spec:
+      containers:
+        - name: app
+          image: sven110sugar/cake-app:e3fa84b267efb2d4f2671803770aa2108f121a04
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 2
+              memory: 1Gi
