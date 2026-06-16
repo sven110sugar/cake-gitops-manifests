@@ -1,0 +1,51 @@
+---
+# Source: cake-app/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: cake-app
+  namespace: dev
+  labels:
+    app: cake-app
+    env: dev
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 5000
+  selector:
+    app: cake-app
+---
+# Source: cake-app/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cake-app
+  namespace: dev
+  labels:
+    app: cake-app
+    env: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cake-app
+  template:
+    metadata:
+      labels:
+        app: cake-app
+        env: dev
+    spec:
+      containers:
+        - name: app
+          image: sven110sugar/cake-app:f1131081a1be1c94943a0aa1df60aae2a8c10254
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
