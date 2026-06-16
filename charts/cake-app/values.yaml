@@ -1,1 +1,28 @@
+# 默认值 — 所有环境共享的基线配置
+# 各环境通过 dev/values.yaml、staging/values.yaml 等覆盖
 
+image:
+  repository: sven110sugar/cake-app
+  tag: latest
+  pullPolicy: IfNotPresent
+
+replicas: 1
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 5000
+
+containerPort: 5000
+
+env:
+  name: dev
+  debug: "true"
