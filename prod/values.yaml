@@ -1,18 +1,18 @@
-# staging 环境 — 2 副本，模拟生产配置，debug 关闭
+# prod 环境 — 3 副本，高资源，手动审批后才部署
 
 image:
   repository: sven110sugar/cake-app
-  tag: latest
+  tag: stable
 
-replicas: 2
+replicas: 3
 
 resources:
   requests:
-    cpu: 200m
-    memory: 256Mi
-  limits:
-    cpu: 1
+    cpu: 500m
     memory: 512Mi
+  limits:
+    cpu: 2
+    memory: 1Gi
 
 service:
   type: ClusterIP
@@ -20,8 +20,7 @@ service:
   targetPort: 5000
 
 env:
-  name: staging
+  name: prod
   debug: "false"
 
-namespace: staging
-
+namespace: prod
